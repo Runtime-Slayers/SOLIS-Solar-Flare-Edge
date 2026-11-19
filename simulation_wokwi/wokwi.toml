@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+elf = "build/SOLIS_V3_1_TMR_SafeMode.ino.elf"
+firmware = "build/SOLIS_V3_1_TMR_SafeMode.ino.bin"

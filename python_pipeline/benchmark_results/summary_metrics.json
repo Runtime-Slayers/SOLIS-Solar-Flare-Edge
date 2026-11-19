@@ -1,0 +1,86 @@
+{
+  "solexs": {
+    "files_analyzed": 0,
+    "files_with_flares": 0,
+    "statistics": [],
+    "total_zips": 100
+  },
+  "hel1os": {
+    "files_analyzed": 15,
+    "statistics": [],
+    "total_zips": 21
+  },
+  "confidence_intervals": {
+    "false_negative_rate": {
+      "n_events": 0,
+      "n_trials": 153,
+      "lower_95": 0.0,
+      "upper_95": 0.0244935017240324,
+      "text": "0-2.4%"
+    },
+    "false_alarm_rate": {
+      "n_events": 5,
+      "n_trials": 153,
+      "lower_95": 0.014037827460974803,
+      "upper_95": 0.07421426892161757,
+      "text": "1.4-7.4%"
+    },
+    "accuracy": {
+      "n_correct": 148,
+      "n_trials": 153,
+      "lower_95": 0.9257857310783825,
+      "upper_95": 0.9859621725390252,
+      "text": "92.6-98.6%"
+    },
+    "available_new_data": {
+      "solexs_files": 100,
+      "hel1os_files": 21
+    }
+  },
+  "aggregate_statistics": {
+    "hel1os": {
+      "n_files_analyzed": 15,
+      "total_zips_available": 21,
+      "sample_columns": [
+        "SPEC_NUM",
+        "CHANNEL",
+        "COUNTS",
+        "STAT_ERR",
+        "ROWID",
+        "TSTART",
+        "TSTOP",
+        "EXPOSURE"
+      ],
+      "sample_bands": {
+        "SPEC_NUM": {
+          "n_valid": 2158,
+          "mean": 1078.5,
+          "std": 622.9608735707243,
+          "max": 2157.0,
+          "min": 0.0
+        },
+        "TSTART": {
+          "n_valid": 2158,
+          "mean": 21569.999999977295,
+          "std": 12459.21747138335,
+          "max": 43140.0,
+          "min": 0.0
+        },
+        "TSTOP": {
+          "n_valid": 2158,
+          "mean": 21589.99999997683,
+          "std": 12459.217471382586,
+          "max": 43159.999999,
+          "min": 20.0
+        },
+        "EXPOSURE": {
+          "n_valid": 2158,
+          "mean": 19.99999999953661,
+          "std": 2.1418589192146847e-07,
+          "max": 20.000001,
+          "min": 19.999999
+        }
+      }
+    }
+  }
+}

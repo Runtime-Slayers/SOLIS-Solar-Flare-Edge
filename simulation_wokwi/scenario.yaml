@@ -1,0 +1,32 @@
+name: SOLIS V3.1 TMR SafeMode Verification
+version: 1
+author: Antigravity
+
+steps:
+  - wait-serial: "SOLIS_V3_1_READY"
+  - write-serial: "PING\n"
+  - wait-serial: "PONG"
+  
+  # Step 1: Nominal baseline step
+  - write-serial: "STEP,0.0000001,0.00000001,1.0\n"
+  - wait-serial: "DATA,NOMINAL"
+  
+  # Step 2: Inject SRAM fault into Block A (State A SXR byte 12)
+  - write-serial: "INJECT,0,12,8\n"
+  - wait-serial: "INJECT_OK"
+  
+  # Step 3: Run step immediately after fault - TMR must detect & repair
+  - write-serial: "STEP,0.00000012,0.000000012,1.0\n"
+  - wait-serial: "SEU_REPAIRED"
+  
+  # Step 4: Inject SRAM fault into Block C (State C HXR byte 24)
+  - write-serial: "INJECT,2,24,128\n"
+  - wait-serial: "INJECT_OK"
+  
+  # Step 5: Run step - TMR must repair Block C
+  - write-serial: "STEP,0.00000015,0.000000015,1.0\n"
+  - wait-serial: "SEU_REPAIRED"
+  
+  # Step 6: Trigger Real Impulsive M-Class Flare Telemetry
+  - write-serial: "STEP,0.000050,0.000025,1.0\n"
+  - wait-serial: "DATA,ALERT"

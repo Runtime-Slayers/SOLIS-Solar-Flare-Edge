@@ -1,0 +1,472 @@
+{
+  "solexs": [
+    {
+      "label": "20240510",
+      "error": "no_data"
+    },
+    {
+      "label": "20240511",
+      "error": "no_data"
+    },
+    {
+      "label": "20240512",
+      "error": "no_data"
+    },
+    {
+      "label": "20240513",
+      "error": "no_data"
+    },
+    {
+      "label": "20240514",
+      "error": "no_data"
+    },
+    {
+      "label": "20240515",
+      "error": "no_data"
+    },
+    {
+      "label": "20240516",
+      "error": "no_data"
+    },
+    {
+      "label": "20240517",
+      "error": "no_data"
+    },
+    {
+      "label": "20240518",
+      "error": "no_data"
+    },
+    {
+      "label": "20240519",
+      "error": "no_data"
+    },
+    {
+      "label": "20240520",
+      "error": "no_data"
+    },
+    {
+      "label": "20240521",
+      "error": "no_data"
+    },
+    {
+      "label": "20240522",
+      "error": "no_data"
+    },
+    {
+      "label": "20240523",
+      "error": "no_data"
+    },
+    {
+      "label": "20240524",
+      "error": "no_data"
+    },
+    {
+      "label": "20240525",
+      "error": "no_data"
+    },
+    {
+      "label": "20240526",
+      "error": "no_data"
+    },
+    {
+      "label": "20240527",
+      "error": "no_data"
+    },
+    {
+      "label": "20240528",
+      "error": "no_data"
+    },
+    {
+      "label": "20240529",
+      "error": "no_data"
+    },
+    {
+      "label": "20240530",
+      "error": "no_data"
+    },
+    {
+      "label": "20240531",
+      "error": "no_data"
+    },
+    {
+      "label": "20260506",
+      "error": "no_data"
+    },
+    {
+      "label": "20260507",
+      "error": "no_data"
+    },
+    {
+      "label": "20260508",
+      "error": "no_data"
+    },
+    {
+      "label": "20260509",
+      "error": "no_data"
+    },
+    {
+      "label": "20260510",
+      "error": "no_data"
+    },
+    {
+      "label": "20260511",
+      "error": "no_data"
+    },
+    {
+      "label": "20260512",
+      "error": "no_data"
+    },
+    {
+      "label": "20260513",
+      "error": "no_data"
+    },
+    {
+      "label": "20260514",
+      "error": "no_data"
+    },
+    {
+      "label": "20260515",
+      "error": "no_data"
+    },
+    {
+      "label": "20260516",
+      "error": "no_data"
+    },
+    {
+      "label": "20260517",
+      "error": "no_data"
+    },
+    {
+      "label": "20260518",
+      "error": "no_data"
+    },
+    {
+      "label": "20260519",
+      "error": "no_data"
+    },
+    {
+      "label": "20260520",
+      "error": "no_data"
+    },
+    {
+      "label": "20260521",
+      "error": "no_data"
+    },
+    {
+      "label": "20260523",
+      "error": "no_data"
+    },
+    {
+      "label": "20260524",
+      "error": "no_data"
+    },
+    {
+      "label": "20260525",
+      "error": "no_data"
+    },
+    {
+      "label": "20260526",
+      "error": "no_data"
+    },
+    {
+      "label": "20260527",
+      "error": "no_data"
+    },
+    {
+      "label": "20260528",
+      "error": "no_data"
+    },
+    {
+      "label": "20260529",
+      "error": "no_data"
+    },
+    {
+      "label": "20260530",
+      "error": "no_data"
+    },
+    {
+      "label": "20260531",
+      "error": "no_data"
+    },
+    {
+      "label": "20260601",
+      "error": "no_data"
+    },
+    {
+      "label": "20260602",
+      "error": "no_data"
+    },
+    {
+      "label": "20260603",
+      "error": "no_data"
+    },
+    {
+      "label": "20260605",
+      "error": "no_data"
+    },
+    {
+      "label": "20260606",
+      "error": "no_data"
+    },
+    {
+      "label": "20260607",
+      "error": "no_data"
+    },
+    {
+      "label": "20260608",
+      "error": "no_data"
+    },
+    {
+      "label": "20260610",
+      "error": "no_data"
+    },
+    {
+      "label": "20260611",
+      "error": "no_data"
+    },
+    {
+      "label": "20260612",
+      "error": "no_data"
+    },
+    {
+      "label": "20260613",
+      "error": "no_data"
+    },
+    {
+      "label": "20260614",
+      "error": "no_data"
+    },
+    {
+      "label": "20260615",
+      "error": "no_data"
+    },
+    {
+      "label": "20260616",
+      "error": "no_data"
+    },
+    {
+      "label": "20260617",
+      "error": "no_data"
+    },
+    {
+      "label": "20260618",
+      "error": "no_data"
+    },
+    {
+      "label": "20260619",
+      "error": "no_data"
+    },
+    {
+      "label": "20260620",
+      "error": "no_data"
+    },
+    {
+      "label": "20260621",
+      "error": "no_data"
+    },
+    {
+      "label": "20260622",
+      "error": "no_data"
+    },
+    {
+      "label": "20260623",
+      "error": "no_data"
+    },
+    {
+      "label": "20260624",
+      "error": "no_data"
+    },
+    {
+      "label": "20260625",
+      "error": "no_data"
+    },
+    {
+      "label": "20260626",
+      "error": "no_data"
+    },
+    {
+      "label": "20260627",
+      "error": "no_data"
+    },
+    {
+      "label": "20260628",
+      "error": "no_data"
+    },
+    {
+      "label": "20260629",
+      "error": "no_data"
+    },
+    {
+      "label": "20260630",
+      "error": "no_data"
+    },
+    {
+      "label": "20260701",
+      "error": "no_data"
+    },
+    {
+      "label": "20260702",
+      "error": "no_data"
+    },
+    {
+      "label": "20260703",
+      "error": "no_data"
+    },
+    {
+      "label": "20260704",
+      "error": "no_data"
+    },
+    {
+      "label": "20260705",
+      "error": "no_data"
+    },
+    {
+      "label": "20260706",
+      "error": "no_data"
+    },
+    {
+      "label": "20260707",
+      "error": "no_data"
+    },
+    {
+      "label": "20260708",
+      "error": "no_data"
+    },
+    {
+      "label": "20260709",
+      "error": "no_data"
+    },
+    {
+      "label": "20260710",
+      "error": "no_data"
+    },
+    {
+      "label": "20260711",
+      "error": "no_data"
+    },
+    {
+      "label": "20260712",
+      "error": "no_data"
+    },
+    {
+      "label": "20260713",
+      "error": "no_data"
+    },
+    {
+      "label": "20260714",
+      "error": "no_data"
+    },
+    {
+      "label": "20260715",
+      "error": "no_data"
+    },
+    {
+      "label": "20260716",
+      "error": "no_data"
+    },
+    {
+      "label": "20260717",
+      "error": "no_data"
+    },
+    {
+      "label": "20260718",
+      "error": "no_data"
+    },
+    {
+      "label": "20260719",
+      "error": "no_data"
+    },
+    {
+      "label": "20260720",
+      "error": "no_data"
+    },
+    {
+      "label": "20260721",
+      "error": "no_data"
+    },
+    {
+      "label": "20260722",
+      "error": "no_data"
+    },
+    {
+      "label": "20260723",
+      "error": "no_data"
+    },
+    {
+      "label": "20260724",
+      "error": "no_data"
+    },
+    {
+      "label": "20260725",
+      "error": "no_data"
+    }
+  ],
+  "hel1os": [
+    {
+      "label": "HLS_20260704_120001_43194sec_lev1_V211",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260716_000012_43175sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260716_121027_42565sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260717_000009_43182sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260717_120006_43190sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260718_000010_43175sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260718_120001_43189sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260719_000005_43179sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260720_000012_43177sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260720_114956_43798sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260721_000009_43178sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260721_120003_43189sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260722_000006_43184sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260722_121027_42566sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260723_000007_43181sec_lev1_V111",
+      "error": "no_data"
+    },
+    {
+      "label": "HLS_20260723_120005_43185sec_lev1_V111",
+      "error": "no_data"
+    }
+  ],
+  "goes18": null,
+  "started": "2026-08-16T17:32:33.562571"
+}
