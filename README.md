@@ -162,7 +162,7 @@ arduino-cli upload -p <PORT> --fqbn esp32:esp32:esp32 firmware/SOLIS_V3_1_TMR_Sa
 
 ## 5. Repository Structure
 
-`	ext
+```text
 SOLIS-Solar-Flare-Edge/
 ├── assets/              # Architecture and validation figures (fig1 - fig7)
 ├── docs/                # System architecture diagrams, process flows, and design spec
@@ -178,7 +178,8 @@ SOLIS-Solar-Flare-Edge/
 │   └── datasets/        # Local live telemetry cache
 └── simulation_wokwi/    # Wokwi HIL config and automated SEU fault-injection scripts
     └── README.md        # HIL setup and virtual radiation injection testbench
-`
+```
+
 ---
 
 ## 6. Team & Contact

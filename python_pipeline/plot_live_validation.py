@@ -2,25 +2,22 @@
 """
 Publication-Quality Figure Generator for SOLIS Live Telemetry Validation (AR4581)
 Designed for peer-reviewed space science / aerospace engineering manuscripts & GitHub showcase.
-Zero overlapping text, generous headroom, clear lead-time shading, and professional typography.
+Zero overlapping text, generous headroom, dual-axis flare classification, and clean typography.
 """
 
 import json
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 import numpy as np
 from pathlib import Path
 
 # Paths
-DATA_FILE = Path(r"C:\Users\brr33\Downloads\SOLIS-Solar-Flare-Edge\python_pipeline\datasets\noaa_goes18_xray_7day_live.json")
-RESULTS_FILE = Path(r"C:\Users\brr33\Downloads\SOLIS-Solar-Flare-Edge\python_pipeline\benchmark_results\live_validation_nov2026_results.json")
-OUTPUT_FIG = Path(r"C:\Users\brr33\Downloads\SOLIS-Solar-Flare-Edge\assets\fig7_live_noaa_nov2026_validation.png")
+BASE_DIR = Path(__file__).resolve().parent
+DATA_FILE = BASE_DIR / "datasets" / "noaa_goes18_xray_7day_live.json"
+RESULTS_FILE = BASE_DIR / "benchmark_results" / "live_validation_nov2026_results.json"
+OUTPUT_FIG = BASE_DIR.parent / "assets" / "fig7_live_noaa_nov2026_validation.png"
 
 with open(DATA_FILE, "r", encoding="utf-8") as f:
     raw = json.load(f)
-
-with open(RESULTS_FILE, "r", encoding="utf-8") as f:
-    results = json.load(f)
 
 # Extract synchronized 1-minute time series
 ts_dict = {}
@@ -41,20 +38,20 @@ valid_times = sorted([t for t in ts_dict if "long" in ts_dict[t] and "short" in 
 long_flux = np.array([ts_dict[t]["long"] for t in valid_times])
 short_flux = np.array([ts_dict[t]["short"] for t in valid_times])
 
-# Create figure with high DPI and generous aspect ratio
-fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12.5, 9.0), dpi=300)
-fig.patch.set_facecolor('#ffffff')
+# Create figure
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(13.2, 9.8), dpi=300)
+fig.patch.set_facecolor("#ffffff")
 
-# Global styling
-for ax in (ax1, ax2):
-    ax.set_facecolor('#fbfbfc')
-    ax.grid(True, which="major", ls="-", lw=0.6, color="#e2e4e8", zorder=0)
-    ax.grid(True, which="minor", ls=":", lw=0.4, color="#edf0f3", zorder=0)
+def style_axis(ax, ymin, ymax):
+    ax.set_facecolor("#ffffff")
+    ax.grid(True, which="major", ls="-", lw=0.5, color="#e5e7eb", zorder=0)
+    ax.grid(True, which="minor", ls=":", lw=0.3, color="#f3f4f6", zorder=0)
     ax.set_yscale("log")
-    ax.tick_params(axis='both', which='major', labelsize=10, length=5, direction='out')
-    ax.tick_params(axis='both', which='minor', length=2.5, direction='out')
+    ax.set_ylim(ymin, ymax)
+    ax.tick_params(axis="both", which="major", labelsize=10, length=5, direction="out", color="#374151")
+    ax.tick_params(axis="both", which="minor", length=2.5, direction="out", color="#9ca3af")
     for spine in ax.spines.values():
-        spine.set_color('#2c3e50')
+        spine.set_color("#374151")
         spine.set_linewidth(1.0)
 
 # ==============================================================================
@@ -66,65 +63,69 @@ m_long = long_flux[m_indices]
 m_short = short_flux[m_indices]
 m_steps = np.arange(len(m_window))
 
-# Plot irradiance curves
-line_sxr1, = ax1.plot(m_steps, m_long, color="#d95f02", lw=2.2, zorder=4, label="GOES-18 SXR (0.1–0.8 nm, Primary 1-min)")
-line_hxr1, = ax1.plot(m_steps, m_short, color="#2b5c8f", lw=1.6, ls="--", zorder=4, label="GOES-18 HXR (0.05–0.4 nm, Hard Channel)")
+p1_idx = m_window.index("2026-11-19T13:24:00Z")
+p2_idx = m_window.index("2026-11-19T13:59:00Z")
+trig1_idx = m_window.index("2026-11-19T12:24:00Z")
 
-# Indices of events
-p1_idx = m_window.index("2026-11-19T13:24:00Z")  # M2.4 Peak
-p2_idx = m_window.index("2026-11-19T13:59:00Z")  # M1.1 Peak
-trig1_idx = m_window.index("2026-11-19T12:24:00Z") # Flare 1 Trigger
+style_axis(ax1, 2e-8, 3e-3)
 
-# Shaded Early-Warning Lead Time Zone (Green)
-ax1.axvspan(trig1_idx, p1_idx, color="#d4edda", alpha=0.55, zorder=1, label="SOLIS Early Warning Window (60.0 min lead time)")
+ax1.plot(m_steps, m_long, color="#d95f02", lw=2.4, zorder=4, label="GOES-18 SXR (0.1–0.8 nm, Primary 1-min)")
+ax1.plot(m_steps, m_short, color="#2b5c8f", lw=1.6, ls="--", zorder=4, label="GOES-18 HXR (0.05–0.4 nm, Hard Channel)")
+ax1.axvspan(trig1_idx, p1_idx, color="#e8f5e9", alpha=0.75, zorder=1, label="SOLIS Early Warning Window (60.0 min lead time)")
 
-# Threshold lines with label tags
-ax1.axhline(1e-4, color="#721c24", ls="-.", lw=1.0, alpha=0.8, zorder=2)
-ax1.text(len(m_steps)-2, 1.08e-4, "X-Class Threshold (10⁻⁴ W/m²)", color="#721c24", fontsize=8.5, ha="right", va="bottom", fontweight="bold")
+# Reference Threshold lines
+ax1.axhline(1e-4, color="#721c24", ls="-.", lw=1.0, alpha=0.7, zorder=2)
+ax1.axhline(1e-5, color="#c0392b", ls="--", lw=1.0, alpha=0.7, zorder=2)
+ax1.axhline(1e-6, color="#d35400", ls=":", lw=1.0, alpha=0.7, zorder=2)
 
-ax1.axhline(1e-5, color="#c0392b", ls="--", lw=1.1, alpha=0.8, zorder=2)
-ax1.text(len(m_steps)-2, 1.08e-5, "M-Class Threshold (10⁻⁵ W/m²)", color="#c0392b", fontsize=8.5, ha="right", va="bottom", fontweight="bold")
+# Secondary Y-axis for NOAA Flare Classes
+ax1_r = ax1.twinx()
+ax1_r.set_yscale("log")
+ax1_r.set_ylim(2e-8, 3e-3)
+ax1_r.set_yticks([1e-6, 1e-5, 1e-4])
+ax1_r.set_yticklabels(["C-Class\n(10⁻⁶ W/m²)", "M-Class\n(10⁻⁵ W/m²)", "X-Class\n(10⁻⁴ W/m²)"], fontsize=8.5, fontweight="bold")
+ax1_r.tick_params(axis="y", length=4, color="#374151", labelsize=8.5)
+ax1_r.spines["right"].set_color("#374151")
+ax1_r.spines["left"].set_visible(False)
+ax1_r.spines["top"].set_visible(False)
+ax1_r.spines["bottom"].set_visible(False)
+ax1_r.yaxis.get_majorticklabels()[0].set_color("#d35400")
+ax1_r.yaxis.get_majorticklabels()[1].set_color("#c0392b")
+ax1_r.yaxis.get_majorticklabels()[2].set_color("#721c24")
 
-ax1.axhline(1e-6, color="#d35400", ls=":", lw=1.0, alpha=0.8, zorder=2)
-ax1.text(len(m_steps)-2, 1.08e-6, "C-Class Threshold (10⁻⁶ W/m²)", color="#d35400", fontsize=8.5, ha="right", va="bottom", fontweight="bold")
-
-# Y-Axis limits with generous headroom (1e-8 to 4e-4) to avoid any title collision
-ax1.set_ylim(2e-8, 4e-4)
-
-# Trigger point marker
-ax1.scatter([trig1_idx], [m_long[trig1_idx]], color="#155724", marker="^", s=110, zorder=6, edgecolors="white", lw=1.2)
+# Safe-Mode Trigger Annotation
+ax1.scatter([trig1_idx], [m_long[trig1_idx]], color="#155724", marker="^", s=130, zorder=7, edgecolors="black", lw=1.2)
 ax1.annotate("SOLIS Safe-Mode Assertion\n12:24:00 UTC (Thermal Onset)",
-             xy=(trig1_idx, m_long[trig1_idx]), xytext=(trig1_idx - 35, 3e-7),
+             xy=(trig1_idx, m_long[trig1_idx]), xytext=(trig1_idx - 45, 1.8e-7),
              arrowprops=dict(arrowstyle="->", color="#155724", lw=1.4, connectionstyle="arc3,rad=-0.15"),
-             fontsize=9, fontweight="bold", color="#155724",
-             bbox=dict(boxstyle="round,pad=0.4", fc="#ffffff", ec="#155724", lw=1.0, alpha=0.95))
+             fontsize=9, fontweight="bold", color="#155724", zorder=10,
+             bbox=dict(boxstyle="round,pad=0.45", fc="#ffffff", ec="#155724", lw=1.2, alpha=1.0))
 
-# Peak 1 (M2.4) Annotation - positioned cleanly below title in open region
-ax1.scatter([p1_idx], [m_long[p1_idx]], color="#c0392b", marker="o", s=90, zorder=6, edgecolors="black", lw=1.2)
+# Flare 1 Peak Annotation
+ax1.scatter([p1_idx], [m_long[p1_idx]], color="#c0392b", marker="o", s=100, zorder=7, edgecolors="black", lw=1.2)
 ax1.annotate("Flare 1 Peak: M2.4\nFlux: 2.40 × 10⁻⁵ W/m²\nWarning Lead: 60.0 min (3600 s)",
-             xy=(p1_idx, m_long[p1_idx]), xytext=(p1_idx - 58, 7.5e-5),
+             xy=(p1_idx, m_long[p1_idx]), xytext=(p1_idx - 65, 4.5e-4),
              arrowprops=dict(arrowstyle="->", color="#c0392b", lw=1.4, connectionstyle="arc3,rad=0.15"),
-             fontsize=9, fontweight="bold", color="#900c3f",
-             bbox=dict(boxstyle="round,pad=0.4", fc="#ffffff", ec="#c0392b", lw=1.0, alpha=0.95))
+             fontsize=9, fontweight="bold", color="#900c3f", zorder=10,
+             bbox=dict(boxstyle="round,pad=0.45", fc="#ffffff", ec="#c0392b", lw=1.2, alpha=1.0))
 
-# Peak 2 (M1.1) Annotation - positioned cleanly to the right
-ax1.scatter([p2_idx], [m_long[p2_idx]], color="#8e44ad", marker="s", s=85, zorder=6, edgecolors="black", lw=1.2)
+# Flare 2 Peak Annotation
+ax1.scatter([p2_idx], [m_long[p2_idx]], color="#8e44ad", marker="s", s=95, zorder=7, edgecolors="black", lw=1.2)
 ax1.annotate("Flare 2 Peak: M1.1 (35 min later)\nFlux: 1.10 × 10⁻⁵ W/m²\nContinuous Lock Retained",
-             xy=(p2_idx, m_long[p2_idx]), xytext=(p2_idx + 22, 4.5e-5),
+             xy=(p2_idx, m_long[p2_idx]), xytext=(p2_idx + 22, 4.5e-4),
              arrowprops=dict(arrowstyle="->", color="#8e44ad", lw=1.4, connectionstyle="arc3,rad=-0.15"),
-             fontsize=9, fontweight="bold", color="#4a235a",
-             bbox=dict(boxstyle="round,pad=0.4", fc="#ffffff", ec="#8e44ad", lw=1.0, alpha=0.95))
+             fontsize=9, fontweight="bold", color="#4a235a", zorder=10,
+             bbox=dict(boxstyle="round,pad=0.45", fc="#ffffff", ec="#8e44ad", lw=1.2, alpha=1.0))
 
-# Panel title placed neatly inside or left-aligned with ample pad
 ax1.set_title("(a) Active Region AR4581 Double M-Class Eruption Sequence — 19 November 2026 (Live NOAA GOES-18)", 
-              fontsize=11.5, fontweight="bold", color="#1c2833", loc="left", pad=12)
-ax1.set_ylabel("Solar Irradiance (W · m⁻²)", fontsize=10.5, fontweight="bold", color="#1c2833")
+              fontsize=11.5, fontweight="bold", color="#111827", loc="left", pad=12)
+ax1.set_ylabel("Solar Irradiance (W · m⁻²)", fontsize=10.5, fontweight="bold", color="#111827")
 
-# Time Ticks
 tick_interval = 30
 ax1.set_xticks(m_steps[::tick_interval])
 ax1.set_xticklabels([m_window[i].split("T")[1][:5] + " UTC" for i in range(0, len(m_window), tick_interval)], fontweight="medium")
-ax1.legend(loc="lower right", frameon=True, facecolor="#ffffff", edgecolor="#bdc3c7", fontsize=8.8, framealpha=0.95)
+ax1.set_xlim(0, len(m_steps)-1)
+ax1.legend(loc="lower left", bbox_to_anchor=(0.52, 0.05), frameon=True, facecolor="#ffffff", edgecolor="#d1d5db", fontsize=8.8, framealpha=1.0)
 
 
 # ==============================================================================
@@ -136,57 +137,62 @@ c_long = long_flux[c_indices]
 c_short = short_flux[c_indices]
 c_steps = np.arange(len(c_window))
 
-# Plot irradiance curves
-ax2.plot(c_steps, c_long, color="#16a085", lw=2.2, zorder=4, label="GOES-18 SXR (0.1–0.8 nm, Primary 1-min)")
+cp_idx = c_window.index("2026-11-20T11:30:00Z")
+ctrig_idx = c_window.index("2026-11-20T11:16:00Z")
+
+style_axis(ax2, 2e-8, 1e-3)
+
+ax2.plot(c_steps, c_long, color="#16a085", lw=2.4, zorder=4, label="GOES-18 SXR (0.1–0.8 nm, Primary 1-min)")
 ax2.plot(c_steps, c_short, color="#2b5c8f", lw=1.6, ls="--", zorder=4, label="GOES-18 HXR (0.05–0.4 nm, Hard Channel)")
+ax2.axvspan(ctrig_idx, cp_idx, color="#e8f5e9", alpha=0.75, zorder=1, label="SOLIS Early Warning Window (14.0 min / 840 s lead time)")
 
-cp_idx = c_window.index("2026-11-20T11:30:00Z")   # C9.7 Peak
-ctrig_idx = c_window.index("2026-11-20T11:16:00Z") # C9.7 Trigger (14 min pre-peak)
+# Thresholds
+ax2.axhline(1e-5, color="#c0392b", ls="--", lw=1.0, alpha=0.7, zorder=2)
+ax2.axhline(1e-6, color="#d35400", ls=":", lw=1.0, alpha=0.7, zorder=2)
 
-# Shaded Early-Warning Lead Time Zone (Green)
-ax2.axvspan(ctrig_idx, cp_idx, color="#d4edda", alpha=0.55, zorder=1, label="SOLIS Early Warning Window (14.0 min / 840 s lead time)")
+# Secondary Y-axis for Panel 2
+ax2_r = ax2.twinx()
+ax2_r.set_yscale("log")
+ax2_r.set_ylim(2e-8, 1e-3)
+ax2_r.set_yticks([1e-6, 1e-5])
+ax2_r.set_yticklabels(["C-Class\n(10⁻⁶ W/m²)", "M-Class\n(10⁻⁵ W/m²)"], fontsize=8.5, fontweight="bold")
+ax2_r.tick_params(axis="y", length=4, color="#374151", labelsize=8.5)
+ax2_r.spines["right"].set_color("#374151")
+ax2_r.spines["left"].set_visible(False)
+ax2_r.spines["top"].set_visible(False)
+ax2_r.spines["bottom"].set_visible(False)
+ax2_r.yaxis.get_majorticklabels()[0].set_color("#d35400")
+ax2_r.yaxis.get_majorticklabels()[1].set_color("#c0392b")
 
-# Threshold lines with label tags
-ax2.axhline(1e-5, color="#c0392b", ls="--", lw=1.1, alpha=0.8, zorder=2)
-ax2.text(len(c_steps)-2, 1.08e-5, "M-Class Threshold (10⁻⁵ W/m²)", color="#c0392b", fontsize=8.5, ha="right", va="bottom", fontweight="bold")
-
-ax2.axhline(1e-6, color="#d35400", ls=":", lw=1.0, alpha=0.8, zorder=2)
-ax2.text(len(c_steps)-2, 1.08e-6, "C-Class Threshold (10⁻⁶ W/m²)", color="#d35400", fontsize=8.5, ha="right", va="bottom", fontweight="bold")
-
-# Y-Axis limits with generous headroom (1e-8 to 2e-4)
-ax2.set_ylim(1.5e-8, 2e-4)
-
-# Trigger point marker
-ax2.scatter([ctrig_idx], [c_long[ctrig_idx]], color="#155724", marker="^", s=110, zorder=6, edgecolors="white", lw=1.2)
+# Trigger marker
+ax2.scatter([ctrig_idx], [c_long[ctrig_idx]], color="#155724", marker="^", s=130, zorder=7, edgecolors="black", lw=1.2)
 ax2.annotate("Safe-Mode Latch Triggered\n11:16:00 UTC (14 min pre-peak)",
-             xy=(ctrig_idx, c_long[ctrig_idx]), xytext=(ctrig_idx - 45, 1.8e-6),
+             xy=(ctrig_idx, c_long[ctrig_idx]), xytext=(ctrig_idx - 55, 1.8e-6),
              arrowprops=dict(arrowstyle="->", color="#155724", lw=1.4, connectionstyle="arc3,rad=-0.15"),
-             fontsize=9, fontweight="bold", color="#155724",
-             bbox=dict(boxstyle="round,pad=0.4", fc="#ffffff", ec="#155724", lw=1.0, alpha=0.95))
+             fontsize=9, fontweight="bold", color="#155724", zorder=10,
+             bbox=dict(boxstyle="round,pad=0.45", fc="#ffffff", ec="#155724", lw=1.2, alpha=1.0))
 
-# Peak (C9.7) Annotation - placed with plenty of margin
-ax2.scatter([cp_idx], [c_long[cp_idx]], color="#c0392b", marker="o", s=90, zorder=6, edgecolors="black", lw=1.2)
+# Peak marker
+ax2.scatter([cp_idx], [c_long[cp_idx]], color="#c0392b", marker="o", s=100, zorder=7, edgecolors="black", lw=1.2)
 ax2.annotate("C9.7 Eruption Peak (Near M-Class)\nFlux: 9.66 × 10⁻⁶ W/m²\nWarning Lead: 14.0 min (840 s)",
-             xy=(cp_idx, c_long[cp_idx]), xytext=(cp_idx + 18, 3.8e-5),
+             xy=(cp_idx, c_long[cp_idx]), xytext=(cp_idx + 22, 1.4e-4),
              arrowprops=dict(arrowstyle="->", color="#c0392b", lw=1.4, connectionstyle="arc3,rad=-0.15"),
-             fontsize=9, fontweight="bold", color="#900c3f",
-             bbox=dict(boxstyle="round,pad=0.4", fc="#ffffff", ec="#c0392b", lw=1.0, alpha=0.95))
+             fontsize=9, fontweight="bold", color="#900c3f", zorder=10,
+             bbox=dict(boxstyle="round,pad=0.45", fc="#ffffff", ec="#c0392b", lw=1.2, alpha=1.0))
 
-# Panel title
 ax2.set_title("(b) Active Region AR4581 Precursor Eruption (C9.7) — 20 November 2026 (Live NOAA GOES-18)", 
-              fontsize=11.5, fontweight="bold", color="#1c2833", loc="left", pad=12)
-ax2.set_ylabel("Solar Irradiance (W · m⁻²)", fontsize=10.5, fontweight="bold", color="#1c2833")
-ax2.set_xlabel("Observation Timestamp (Universal Time UTC)", fontsize=10.5, fontweight="bold", color="#1c2833")
+              fontsize=11.5, fontweight="bold", color="#111827", loc="left", pad=12)
+ax2.set_ylabel("Solar Irradiance (W · m⁻²)", fontsize=10.5, fontweight="bold", color="#111827")
+ax2.set_xlabel("Observation Timestamp (Universal Time UTC)", fontsize=10.5, fontweight="bold", color="#111827")
 
-# Time Ticks
 ax2.set_xticks(c_steps[::30])
 ax2.set_xticklabels([c_window[i].split("T")[1][:5] + " UTC" for i in range(0, len(c_window), 30)], fontweight="medium")
-ax2.legend(loc="lower right", frameon=True, facecolor="#ffffff", edgecolor="#bdc3c7", fontsize=8.8, framealpha=0.95)
+ax2.set_xlim(0, len(c_steps)-1)
+ax2.legend(loc="lower left", bbox_to_anchor=(0.52, 0.05), frameon=True, facecolor="#ffffff", edgecolor="#d1d5db", fontsize=8.8, framealpha=1.0)
 
-# Overall clean suptitle
 fig.suptitle("SOLIS Operational In-Orbit Telemetry Validation: Active Region AR4581 Live Space Weather Tracking",
-             fontsize=13.5, fontweight="heavy", color="#1a252f", y=0.985)
+             fontsize=13.5, fontweight="bold", color="#111827", y=0.985)
 
-plt.subplots_adjust(top=0.93, bottom=0.07, hspace=0.32, left=0.08, right=0.96)
+plt.subplots_adjust(top=0.93, bottom=0.07, hspace=0.34, left=0.07, right=0.91)
 plt.savefig(OUTPUT_FIG, dpi=300)
-print(f"Generated pristine, non-overlapping figure at: {OUTPUT_FIG}")
+print(f"Generated pristine figure at: {OUTPUT_FIG}")
