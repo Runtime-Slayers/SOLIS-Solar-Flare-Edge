@@ -8,7 +8,7 @@ import os
 # Note: Ensure wokwi-cli is installed (npm install -g @wokwi/cli)
 # And token is set in environment or passed. We'll use a mocked interface or run wokwi-cli if token available.
 
-WOKWI_TOKEN = "wok_jTUHohSX9sJzNJemCScAv3Vuz2qPfxZx58011d7f"
+WOKWI_TOKEN = "YOUR_WOKWI_CLI_TOKEN"
 PROJECT_DIR = "."
 
 print("SOLIS V3.1 - Hardware-in-the-Loop (HIL) SEU Injection Test")

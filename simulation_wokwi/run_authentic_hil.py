@@ -25,7 +25,7 @@ def run_authentic_hil():
     print("[*] Launching Wokwi ESP32 headless simulation with interactive UART pipes...")
 
     # Spawn Wokwi CLI process with bidirectional interactive serial pipes
-    token = "wok_jTUHohSX9sJzNJemCScAv3Vuz2qPfxZx58011d7f"
+    token = "YOUR_WOKWI_CLI_TOKEN"
     cmd = ["wokwi-cli", "--interactive", "--elf", elf_path, "."]
     
     env = os.environ.copy()

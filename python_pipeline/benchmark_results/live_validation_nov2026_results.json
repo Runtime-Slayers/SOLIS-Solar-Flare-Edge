@@ -1,0 +1,44 @@
+{
+  "evaluation_timestamp": "2026-11-21T04:38:28.507663+00:00",
+  "mission_satellite": "NOAA GOES-18 (Primary XRS)",
+  "active_region": "AR4581",
+  "cme_forecast": "Earth-directed glancing blow (Nov 22, 2026)",
+  "flares": {
+    "M2.4": {
+      "event_peak_time": "2026-11-19T13:24:00Z",
+      "peak_flux_W_m2": 2.402642712695524e-05,
+      "status": "DETECTED",
+      "trigger_time": "2026-11-19T12:24:00Z",
+      "lead_time_minutes": 60.0,
+      "lead_time_seconds": 3600.0,
+      "peak_alpha": 0.027170733904217245,
+      "peak_sxr_hxr_ratio": 0.25212801548195474
+    },
+    "M1.1": {
+      "event_peak_time": "2026-11-19T13:59:00Z",
+      "peak_flux_W_m2": 1.1027350410586223e-05,
+      "status": "DETECTED",
+      "trigger_time": "2026-11-19T13:24:00Z",
+      "lead_time_minutes": 35.0,
+      "lead_time_seconds": 2100.0,
+      "peak_alpha": 0.001,
+      "peak_sxr_hxr_ratio": 0.0875713935190149
+    },
+    "C9.7": {
+      "event_peak_time": "2026-11-20T11:30:00Z",
+      "peak_flux_W_m2": 9.65598246693844e-06,
+      "status": "DETECTED",
+      "trigger_time": "2026-11-20T11:16:00Z",
+      "lead_time_minutes": 14.0,
+      "lead_time_seconds": 840.0,
+      "peak_alpha": 0.07130620053309361,
+      "peak_sxr_hxr_ratio": 0.12451338036228209
+    }
+  },
+  "continuous_stream_metrics": {
+    "total_steps": 10072,
+    "quiet_steps": 7690,
+    "false_alarm_steps": 261,
+    "far_percent": 3.394018205461639
+  }
+}
