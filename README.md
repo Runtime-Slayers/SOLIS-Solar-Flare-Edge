@@ -93,8 +93,6 @@ Evaluated across 45 independent evaluation windows (23 flares, 22 quiet-Sun wind
 | **SOLIS (UKF-IMM + TMR)** | **100.0%** | **0.0%** | **1.000** | **100.0%** | **4.06 ms** | **22.9 KB** |
 
 > **Note:** TSS = 1.000 reflects the 45-window ML benchmark subset. Operational TSS on the full 84-flare mission dataset is 0.9761.
-<<<<<<< Updated upstream
-=======
 
 ### Live Space Weather Telemetry Validation (November 2026 Event Window)
 
@@ -102,17 +100,16 @@ Evaluated in real-time on live 1-minute solar irradiance telemetry streamed from
 
 ![Live Space Weather Validation](assets/fig7_live_noaa_nov2026_validation.png)
 
-| Flare Event | Peak Classification | Peak Time (UTC) | Peak SXR Flux ( \cdot m^{-2}$) | Hardness Ratio (SXR/HXR) | Safe-Mode Assertion Time | Warning Lead Time | Detection Status |
+| Flare Event | Peak Classification | Peak Time (UTC) | Peak SXR Flux ($W \cdot m^{-2}$) | Hardness Ratio (SXR/HXR) | Safe-Mode Assertion Time | Warning Lead Time | Detection Status |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **AR4581 Event 1** | **M2.4** | 2026-11-19 13:24 | .403 \times 10^{-5}$ | 0.252 | 2026-11-19 12:24 | **60.0 min (3600 s)** | **DETECTED** (Latch Triggered) |
-| **AR4581 Event 2** | **M1.1** | 2026-11-19 13:59 | .103 \times 10^{-5}$ | 0.088 | 2026-11-19 13:24 | **35.0 min (2100 s)** | **DETECTED** (Latch Triggered) |
-| **AR4581 Follow-up** | **C9.7** (Near-M) | 2026-11-20 11:30 | .656 \times 10^{-6}$ | 0.124 | 2026-11-20 11:16 | **14.0 min (840 s)** | **DETECTED** (Latch Triggered) |
+| **AR4581 Event 1** | **M2.4** | 2026-11-19 13:24 | $2.403 \times 10^{-5}$ | 0.252 | 2026-11-19 12:24 | **60.0 min (3600 s)** | **DETECTED** (Latch Triggered) |
+| **AR4581 Event 2** | **M1.1** | 2026-11-19 13:59 | $1.103 \times 10^{-5}$ | 0.088 | 2026-11-19 13:24 | **35.0 min (2100 s)** | **DETECTED** (Latch Triggered) |
+| **AR4581 Follow-up** | **C9.7** (Near-M) | 2026-11-20 11:30 | $9.656 \times 10^{-6}$ | 0.124 | 2026-11-20 11:16 | **14.0 min (840 s)** | **DETECTED** (Latch Triggered) |
 
 > **Operational Data Access Note (Aditya-L1 PRADAN & NOAA GOES):**
 > * **Onboard Satellite Processing:** In flight, SOLIS executes directly onboard SmallSat OBCs on raw detector counts prior to ground transmission.
 > * **ISRO ISSDC PRADAN Pipeline:** Public Level-1 Aditya-L1 SoLEXS and HEL1OS FITS tables on [ISSDC PRADAN](https://pradan.issdc.gov.in/ch1/) are released after ground calibration in multi-week post-orbit archive batches.
 > * **Live Ground Testing:** Real-time 0-hour operational nowcasting is validated using low-latency 1-minute streaming telemetry from NOAA SWPC GOES-18 Primary XRS.
->>>>>>> Stashed changes
 
 ---
 
@@ -137,10 +134,7 @@ pip install -r requirements.txt
 ```bash
 python validate_xclass_historical.py
 python ml_baseline_compare.py
-<<<<<<< Updated upstream
-=======
 python validate_live_event_202611.py
->>>>>>> Stashed changes
 ```
 
 ### B. Wokwi Simulation
@@ -170,16 +164,13 @@ arduino-cli upload -p <PORT> --fqbn esp32:esp32:esp32 firmware/SOLIS_V3_1_TMR_Sa
 
 ```text
 SOLIS-Solar-Flare-Edge/
-<<<<<<< Updated upstream
-├── assets/              # Architecture and validation figures (fig1 - fig6)
-=======
 ├── assets/              # Architecture and validation figures (fig1 - fig7)
->>>>>>> Stashed changes
 ├── docs/                # System architecture diagrams (SVG and PNG)
 ├── firmware/            # ESP32 C++ flight firmware, TMR module, power profiler
 │   └── power_profiler/  # Benchtop silicon power and timing measurement sketch
 ├── python_pipeline/     # UKF-IMM pipeline, FITS ingestion, benchmark scripts
-│   └── benchmark_results/ # Pre-computed JSON validation outputs
+│   ├── benchmark_results/ # Pre-computed JSON validation outputs
+│   └── datasets/        # Local live telemetry cache
 └── simulation_wokwi/    # Wokwi HIL config and automated SEU fault-injection scripts
 ```
 
