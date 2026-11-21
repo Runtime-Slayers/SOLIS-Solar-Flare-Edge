@@ -162,18 +162,23 @@ arduino-cli upload -p <PORT> --fqbn esp32:esp32:esp32 firmware/SOLIS_V3_1_TMR_Sa
 
 ## 5. Repository Structure
 
-```text
+`	ext
 SOLIS-Solar-Flare-Edge/
 ├── assets/              # Architecture and validation figures (fig1 - fig7)
-├── docs/                # System architecture diagrams (SVG and PNG)
+├── docs/                # System architecture diagrams, process flows, and design spec
+│   ├── ARCHITECTURE.md  # Formal system design, mathematical equations, and budgets
+│   ├── architecture.svg # Vector architecture block diagram
+│   └── process_flow.svg # Vector execution flowchart
 ├── firmware/            # ESP32 C++ flight firmware, TMR module, power profiler
+│   ├── README.md        # Hardware constraints, pinout, and flashing guide
 │   └── power_profiler/  # Benchtop silicon power and timing measurement sketch
 ├── python_pipeline/     # UKF-IMM pipeline, FITS ingestion, benchmark scripts
+│   ├── README.md        # Scientific module guide and validation instructions
 │   ├── benchmark_results/ # Pre-computed JSON validation outputs
 │   └── datasets/        # Local live telemetry cache
 └── simulation_wokwi/    # Wokwi HIL config and automated SEU fault-injection scripts
-```
-
+    └── README.md        # HIL setup and virtual radiation injection testbench
+`
 ---
 
 ## 6. Team & Contact
